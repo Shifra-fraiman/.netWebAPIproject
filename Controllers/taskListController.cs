@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-// using System.Collections.Generic;
+using project.interfaces;
+using System.Collections.Generic;
 using project.Models;
+using project.Services;
 
 namespace project.Controllers;
 
@@ -8,60 +10,47 @@ namespace project.Controllers;
 [Route("[controller]")]
 public class taskListController : ControllerBase
 {
-    private List<myTask> list;
-
-    public taskListController(){
-        list= new List<myTask>{
-            new myTask {Id=1, Description="home work in java", IsDoing=false},
-            new myTask  {Id=2, Description="angular project", IsDoing=false},
-            new myTask  {Id=3, Description="home work in core", IsDoing=true}
-        };
+    // private List<myTask> list;
+    private ItaskListService taskListService { get; set; }
+    public taskListController(ItaskListService taskListService){
+        this.taskListService = taskListService;
     }
 
      [HttpGet]
-    public IEnumerable<myTask> Get()
+    public ActionResult<IEnumerable<myTask>> Get()
     {
-        return list;
+        return taskListService.GetAll();
     }
+ 
+
     [HttpGet("{id}")]
-    public myTask Get(int id)
+    public ActionResult<myTask> Get(int id)
     {
-        return list.FirstOrDefault(t => t.Id == id);
+        myTask task= taskListService.Get(id);
+        if (task == null)
+            return NotFound();
+        return Ok(task);
     }
 
     [HttpPost]
-    public int Post(myTask newTask)
+    public ActionResult Post(myTask newTask)
     {
-        int newId = list.Max(t => t.Id);
-        newTask.Id= newId+1;
-        list.Add(newTask);
-        return newTask.Id;
+        var newId= taskListService.Post(newTask);  
+        return CreatedAtAction(nameof(Post), new {id=newId}, newTask);
     }
 
     [HttpPut("{id}")]
-    public void Put(int id, myTask newTask)
+    public ActionResult Put(int id, myTask newTask)
     {
-        if (id == newTask.Id)
-        {
-            var task = list.Find(t => t.Id == id);
-            if (task != null)
-            {
-                int index = list.IndexOf(task);
-                list[index] =newTask;
-            }
-        }
+        taskListService.Put(id, newTask);
+        return Ok();
     }
         
     [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-
-            var task = list.Find(t => t.Id == id);
-            if (task != null)
-            {
-                list.Remove(task);
-            }
-
+    public ActionResult Delete(int id)
+    { 
+        taskListService.Delete(id);
+        return Ok();
     }
 
 
