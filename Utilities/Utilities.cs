@@ -8,7 +8,7 @@ namespace project.Utilities
         //extention method
        public static void AddTask(this IServiceCollection services)
        {
-         services.AddSingleton<ItaskListService, taskListService>();
+         services.AddSingleton<ItaskListService, taskListFileService>();
        }
     }
 }

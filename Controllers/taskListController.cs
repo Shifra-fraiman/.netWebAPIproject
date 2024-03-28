@@ -3,6 +3,7 @@ using project.interfaces;
 using System.Collections.Generic;
 using project.Models;
 using project.Services;
+using System.Diagnostics;
 
 namespace project.Controllers;
 
@@ -19,7 +20,7 @@ public class taskListController : ControllerBase
      [HttpGet]
     public ActionResult<IEnumerable<myTask>> Get()
     {
-        return taskListService.GetAll();
+        return taskListService.GetAll().ToList();;
     }
  
 

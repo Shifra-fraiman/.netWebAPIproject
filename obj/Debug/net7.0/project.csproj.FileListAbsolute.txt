@@ -31,3 +31,5 @@ C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\obj\Debug\net7.0\project.pdb
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\obj\Debug\net7.0\project.genruntimeconfig.cache
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\obj\Debug\net7.0\ref\project.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\project.staticwebassets.runtime.json
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Data\taskList.json
