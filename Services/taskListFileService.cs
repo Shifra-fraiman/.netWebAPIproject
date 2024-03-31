@@ -18,7 +18,7 @@ namespace project.Services
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             }
         }
- private void saveToFile(){
+    private void saveToFile(){
         File.WriteAllText(filePath, JsonSerializer.Serialize(tasks));
     }
     public void Delete(int id)
