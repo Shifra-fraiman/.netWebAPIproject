@@ -10,5 +10,10 @@ namespace project.Utilities
        {
          services.AddSingleton<ItaskListService, taskListFileService>();
        }
+         //extention method
+       public static void AddUser(this IServiceCollection services)
+       {
+         services.AddSingleton<IUserService, UserService>();
+       }
     }
 }

@@ -33,3 +33,11 @@ C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\obj\Debug\net7.0\ref\project.dll
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\project.staticwebassets.runtime.json
 C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Data\taskList.json
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Data\user.json
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\1\Documents\המסמכים שלי\הנדסאים-יד\זילברברג-core\project\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

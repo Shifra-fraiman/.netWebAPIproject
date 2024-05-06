@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\1\\Documents\\המסמכים שלי\\הנדסאים-יד\\זילברברג-core\\project\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
+    },
+    {
       "Id": "C:\\Users\\1\\Documents\\המסמכים שלי\\הנדסאים-יד\\זילברברג-core\\project\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\1\\Documents\\המסמכים שלי\\הנדסאים-יד\\זילברברג-core\\project\\wwwroot\\login.html",
+      "PackagePath": "staticwebassets\\login.html"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.project.props",

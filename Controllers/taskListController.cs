@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using project.Models;
 using project.Services;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace project.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Policy ="User")]
 public class taskListController : ControllerBase
 {
     // private List<myTask> list;
@@ -20,7 +22,7 @@ public class taskListController : ControllerBase
      [HttpGet]
     public ActionResult<IEnumerable<myTask>> Get()
     {
-        return taskListService.GetAll().ToList();;
+        return taskListService.GetAll().ToList();
     }
  
 
