@@ -1,46 +1,44 @@
 using project.Utilities;
 using project;
-using Microsoft.OpenApi.Models;
 using project.Services;
+using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var configuration = builder.Configuration;
 
-// Add services to the container.
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:5246");
+                      });
+});
+
+// Add services to the container
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
-//to use with extension method
-builder.Services.AddTask();
-builder.Services.AddUser();
-//add 
-builder.Services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.TokenValidationParameters = TokenService.GetTokenValidationParameters();
-                });
-
-builder.Services.AddAuthorization(cfg =>
-    {
-        cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
-        cfg.AddPolicy("User", policy => policy.RequireClaim("type", "User"));
-    });
-
-builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+
+// Configure Swagger/OpenAPI
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-         In = ParameterLocation.Header,
+        In = ParameterLocation.Header,
         Description = "Please enter JWT with Bearer into field",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
     });
 
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -50,51 +48,65 @@ builder.Services.AddSwaggerGen(opt =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
                 }
             },
-            new string[]{}
+            new string[] { }
         }
     });
 });
 
-//ClearProviders מידלוואר מובנה
+// Add custom services
+builder.Services.AddTask();
+builder.Services.AddUser();
+builder.Services.AddLogin();
+
+// Configure Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.TokenValidationParameters = TokenService.GetTokenValidationParameters();
+});
+
+// Configure Authorization
+builder.Services.AddAuthorization(cfg =>
+{
+    cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
+    cfg.AddPolicy("User", policy => policy.RequireClaim("type", "User"));
+});
+
+// Configure logging
 builder.Logging.ClearProviders();
-//מידלוואר שכותב לקונסול
 builder.Logging.AddConsole();
+
 var app = builder.Build();
 
-app.Map("/favicon.ico", (a) =>
-    a.Run(async c => await Task.CompletedTask));
-
+// Middleware for custom logging
 app.UseMyLogMiddleware();
-// Configure the HTTP request pipeline.
+
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-/*js*/
-app.UseFileServer();
+
+app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-// /*js (remove "launchUrl" from Properties\launchSettings.json*/
-app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
+app.Map("/favicon.ico", a => a.Run(async c => await Task.CompletedTask));
+
 app.Run();
-
-
-/*public void ConfigureServices(IServiceCollection services) {
-  services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    // What kind of authentication you use? Here I just assume cookie authentication.
-    .AddCookie(options => 
-    {
-      options.LoginPath = "/Login/Index";
-    });
-}*/
