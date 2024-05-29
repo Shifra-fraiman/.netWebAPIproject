@@ -1,1 +1,8 @@
-[{"Id":1,"Name":"shifra","Password":"123","IsAdmin":true},{"Id":2,"Name":"string","Password":"string","IsAdmin":true},{"Id":3,"Name":"string","Password":"string","IsAdmin":true},{"Id":4,"Name":"sss","Password":"ddd","IsAdmin":false}]
+[
+    {"Id": 1, "Name": "shifra", "Password": "123", "IsAdmin": true},
+    {"Id": 2, "Name": "chana", "Password": "C12!a", "IsAdmin": true},
+    {"Id": 3, "Name": "yafi", "Password": "10001", "IsAdmin": false},
+    {"Id": 6, "Name": "yael levi", "Password": "963yael", "IsAdmin": false},
+    {"Id": 8, "Name": "rachel", "Password": "789@!#", "IsAdmin": false},
+    {"Id": 10, "Name": "brachi", "Password": "bb*!", "IsAdmin": true}
+]
