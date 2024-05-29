@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/user.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>User`s list</h1>
+        <h3>Add</h3>
+        <form action="javascript:void(0);" method="POST" onsubmit="addUser()">
+            <input type="text" id="add-name" placeholder="name" />
+            <input type="text" id="add-password" placeholder="password" />
+            <input type="checkbox" id="add-isAdmin" placeholder="isAdmin" />
+            <input type="submit" value="Add" />
+        </form>
+
+        <!-- <button onclick="displayEditFormUser()">edit</button> -->
+        <div id="editForm">
+            <h3>Edit</h3>
+            <form action="javascript:void(0);" onsubmit="updateUser()">
+                <input type="hidden" id="edit-Id" />
+                <input type="checkbox" id="edit-isAdmin" />
+                <input type="text" id="edit-name" />
+                <input type="text" id="edit-password" />
+                <input type="submit" value="Save" />
+                <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+
+        <p id="counter"></p>
+        <table id="usersTable">
+            <tr>
+                <th>Is admin?</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th></th>
+            </tr>
+            <tbody id="users"></tbody>
+        </table>
+        <a href="./index.html">back to task`s list</a>
+        <script src="js/user.js" asp-append-version="true"></script>
+        <script>
+            if (!localStorage.getItem("token")) {
+                window.location.href = "./login.html";
+            }
+        </script>
+    </body>
+</html>
