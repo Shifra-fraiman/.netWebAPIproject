@@ -1,4 +1,4 @@
-input[type='submit'],
+/* input[type='submit'],
 button,
 [aria-label] {
     cursor: pointer;
@@ -22,4 +22,132 @@ th {
 td {
     border: 1px solid;
     padding: 5px;
+} */
+/* עיצוב כללי */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1,
+h3 {
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+a[aria-label="Close"] {
+    cursor: pointer;
+    color: #f44336;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+a[aria-label="Close"]:hover {
+    color: #d32f2f;
+}
+
+#editForm,
+#editFormUser {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+#editForm h3,
+#editFormUser h3 {
+    margin-top: 0;
+}
+
+#counter {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#usersButton {
+    margin-top: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#usersButton:hover {
+    background-color: #45a049;
 }
