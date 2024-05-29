@@ -1,30 +1,80 @@
 <!DOCTYPE html>
 <html>
-    <!-- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head> -->
     <head>
         <meta charset="UTF-8" />
+        <meta
+            name="google-signin-client_id"
+            content="339706291131-js191lk6qdkvdmet7djnl8mtpjctpqt4.apps.googleusercontent.com"
+        />
+        <link rel="stylesheet" type="text/css" href="css/login.css" />
         <title>Tasks Project</title>
-        <link rel="stylesheet" href="css/site.css" />
     </head>
     <body>
         <h1>Login</h1>
-        <form id="login-from" action="javascript:void(0);" method="POST" onsubmit="">
+        <form id="login-from" action="javascript:void(0);" method="POST" onsubmit="Login()">
             <div>
                 <label for="name">name</label>
                 <input type="text" id="name" name="name" />
             </div>
             <div>
                 <label for="password">password</label>
-                <input type="text" id="password" name="password" />
+                <input type="password" id="password" name="password" />
             </div>
+            <button type="submit" id="login-button">login</button>
         </form>
-        <script src="js/login.js" asp-append-version="true"></script>
+        <!-- google button -->
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!-- postman button -->
+        <div
+            class="postman-run-button"
+            data-postman-action="collection/fork"
+            data-postman-visibility="public"
+            data-postman-var-1="31345335-02f54460-3789-492f-a232-207985635d34"
+            data-postman-collection-url="entityId=31345335-02f54460-3789-492f-a232-207985635d34&entityType=collection&workspaceId=b53aaafb-a863-40de-bcfd-5e239748e86c"
+        ></div>
         <script type="text/javascript">
-            Login();
+            (function (p, o, s, t, m, a, n) {
+                !p[s] &&
+                    (p[s] = function () {
+                        (p[t] || (p[t] = [])).push(arguments);
+                    });
+                !o.getElementById(s + t) &&
+                    o
+                    .getElementsByTagName("head")[0]
+                    .appendChild(((n = o.createElement("script")), (n.id = s + t), (n.async = 1), (n.src = m), n));
+            })(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js");
         </script>
+        <script type="text/javascript">
+            (function (p, o, s, t, m, a, n) {
+                !p[s] &&
+                    (p[s] = function () {
+                        (p[t] || (p[t] = [])).push(arguments);
+                    });
+                !o.getElementById(s + t) &&
+                    o
+                    .getElementsByTagName("head")[0]
+                    .appendChild(((n = o.createElement("script")), (n.id = s + t), (n.async = 1), (n.src = m), n));
+            })(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js");
+        </script>
+
+        <script src="./js/login.js" asp-append-version="true"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script>
+            function onSignIn(googleUser) {
+                var id_token = googleUser.getAuthResponse().id_token;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/account/google-login");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        window.location.href = "/index.html";
+                    } else {
+                        console.error("Error during Google login:", xhr.responseText);
+                    }
+                };
+                xhr.send("idtoken=" + id_token);
+            }
+        </script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     </body>
 </html>
