@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <title>Tasks Project</title>
-        <link rel="stylesheet" href="css/site.css" />
+        <link rel="stylesheet" href="./css/site.css" />
     </head>
 
     <body>
-        <h1>Pizza CRUD</h1>
+        <h1>Task`s list</h1>
         <h3>Add</h3>
         <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
             <input type="text" id="add-name" placeholder="New task" />
@@ -31,15 +31,35 @@
             <tr>
                 <th>Is Done?</th>
                 <th>TaskName</th>
-                <th>Id</th>
+                <th></th>
                 <th></th>
             </tr>
             <tbody id="tasks"></tbody>
         </table>
 
+        <div id="editFormUser" style="display: none">
+            <h3>Edit</h3>
+            <form action="javascript:void(0);" onsubmit="updateUser()">
+                <input type="hidden" id="edit-Id-user" />
+                <input type="text" id="edit-name" />
+                <input type="text" id="edit-password" />
+                <input type="submit" value="Save" />
+                <a onclick="closeInputUser()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+        <div id="editUser"></div>
+        
+        <a style="display: none" id="usersButton" id="usersButton" href="./user.html">user`s list</a>
         <script src="js/site.js" asp-append-version="true"></script>
+
         <script type="text/javascript">
             getItems();
+        </script>
+
+        <script>
+            if (!localStorage.getItem("token")) {
+                window.location.href = "http://localhost:5246/login.html";
+            }
         </script>
     </body>
 </html>

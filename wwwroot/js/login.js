@@ -1,13 +1,13 @@
-const uri = "Login/Login";
+const uri = "/Login";
 const loginFrom = document.getElementById('login-from');
 
 const Login = async () => {
-    const postReponse = await fetch(uri, {
+    await fetch(uri, {
         method: 'POST',
         body: JSON.stringify(
             {
-                "Name": loginFrom.name,
-                "Password": loginFrom.password
+                "Name": loginFrom.name.value,
+                "Password": loginFrom.password.value
             }
         ),
         headers: {
@@ -15,21 +15,22 @@ const Login = async () => {
         },
     })
         .then(res => {
-            if (!res.Ok) {
+            console.log("res: "+res);
+            if (!res.ok) {
+                console.log("res: " + res.ok + res);
                 throw new Error('Login-faild!')
             }
             else
                 return res.text();
         })
         .then(token => {
-            localStorage.setItem('token', token)
-            window.location.href('./js/site.js');
+            console.log("I accept token: " + token);
+            localStorage.setItem('token', token);
+            window.location.href = './index.html';
         })
         .catch(error => {
             console.error("Login faild: " + error)
             alert('login faild')
         })
 };
-
-
 

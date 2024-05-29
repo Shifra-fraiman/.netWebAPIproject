@@ -31,12 +31,6 @@ namespace project.Controllers
         }
 
 
-        // [HttpGet]
-        // public IActionResult GetIdByNameAndPassword([FromQuery(Name = "Name")] string Name, [FromQuery(Name = "Password")] string Password)
-        // {
-        //     List<User> users = _userService.GetAll().ToList();
-        //     User user = users.FirstOrDefault(user => user.Name == Name && user.Password == Password);
-        //     return Ok(user.Id);
-        // }
+       
     }
 }
