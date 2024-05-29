@@ -6,73 +6,37 @@ using project.Services;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace project.Controllers
 {
-// [Authorize]
-[ApiController]
-[Route("[controller]")]
-public class LoginController : ControllerBase
-{
-    private readonly IUserService _userService;
 
-    public LoginController(IUserService userService)
+    [ApiController]
+    [Route("[controller]")]
+    public class LoginController : ControllerBase
     {
-        _userService = userService;
-    }
+        private readonly ILoginService _loginService;
 
-    [HttpPost]
-    [Route("[action]")]
-    public ActionResult<String> Login([FromBody] User User)
-    {
-        List<User> users = _userService.GetAll();
-        User user = users.FirstOrDefault(user => user.Name == User.Name && user.Password == User.Password);
-
-        if (user == null)
+        public LoginController(ILoginService loginService)
         {
-            return Unauthorized();
-        }
-        System.Console.WriteLine($"User: {user.Name} Login: {user.Password} Admin: {user.IsAdmin}");
-        var claims = new List<Claim>
-            {
-                new Claim("type", "User"),
-                new Claim("userId", user.Id.ToString())
-            };
-        if (user.IsAdmin)
-        {
-            System.Console.WriteLine("I am Admin");
-            claims.Add(new Claim("type", "Admin"));
+            _loginService = loginService;
         }
 
-        System.Console.WriteLine("I in Login");
-        var token = TokenService.GetToken(claims);
-        return new OkObjectResult(TokenService.WriteToken(token));
+        [HttpPost]
+        public ActionResult Login([FromBody] User User)
+        {
+            System.Console.WriteLine("LoginController!");
+            string token = _loginService.Login(User);
+            return new OkObjectResult(token);;
+        }
+
+
+        // [HttpGet]
+        // public IActionResult GetIdByNameAndPassword([FromQuery(Name = "Name")] string Name, [FromQuery(Name = "Password")] string Password)
+        // {
+        //     List<User> users = _userService.GetAll().ToList();
+        //     User user = users.FirstOrDefault(user => user.Name == Name && user.Password == Password);
+        //     return Ok(user.Id);
+        // }
     }
-    // [HttpPost]
-    // [Route("[action]")]
-    // [Authorize(Policy = "Admin")]
-    // public ActionResult Post([FromBody] User newUser)
-    // {
-    //     System.Console.WriteLine("Post!");
-    //     var newId = _userService.Post(newUser);
-    //     return CreatedAtAction(nameof(Post), new { id = newId }, newUser);
-    // }
-
-    // [HttpPost]
-    // [Route("[action]")]
-    // [Authorize(Policy = "Admin")]
-    // public IActionResult create([FromBody] Agent Agent)
-    // {
-    //     System.Console.WriteLine("GenerateBadge");
-    //     var claims = new List<Claim>
-    //         {
-    //             new Claim("type", "Agent"),
-    //             new Claim("ClearanceLevel", Agent.ClearanceLevel.ToString()),
-    //         };
-    //     System.Console.WriteLine("claim: " + claims);
-
-    //     var token = FbiTokenService.GetToken(claims);
-
-    //     return new OkObjectResult(FbiTokenService.WriteToken(token));
-    // }
-}}
+}

@@ -14,15 +14,19 @@ public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
 
+
+
     public UserController(IUserService userService)
     {
         _userService = userService;
+
     }
 
     [HttpGet]
     [Authorize(Policy = "Admin")]
     public ActionResult<IEnumerable<User>> Get()
     {
+        System.Console.WriteLine("get users");
         return _userService.GetAll().ToList();
     }
 
@@ -50,7 +54,7 @@ public class UserController : ControllerBase
     public ActionResult Put(int id, User newUser)
     {
         _userService.Put(id, newUser);
-        return Ok();
+        return Ok("The user updated!");
     }
 
     [HttpDelete("{id}")]
@@ -58,7 +62,7 @@ public class UserController : ControllerBase
     public ActionResult Delete(int id)
     {
         _userService.Delete(id);
-        return Ok();
+        return Ok("The user deleted!");
     }
 
 }
